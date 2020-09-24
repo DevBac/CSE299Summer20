@@ -166,10 +166,12 @@ public class CashInOutActivity extends AppCompatActivity {
                                             if (radioButton.getText().toString().equals("Cash Out")) {
                                                 MemberName.setVisibility(View.GONE);
                                                 CashType = "cash_out";
+                                                CashButton.setText("Cash Out");
                                                 getSupportActionBar().setTitle("Cash Out");
                                             } else {
                                                 MemberName.setVisibility(View.VISIBLE);
                                                 CashType = "cash_in";
+                                                CashButton.setText("Cash In");
                                                 getSupportActionBar().setTitle("Cash In");
                                             }
                                         }
@@ -178,6 +180,7 @@ public class CashInOutActivity extends AppCompatActivity {
                                     CashType = "cash_out";
                                     radioGroup.setVisibility(View.GONE);
                                     MemberName.setVisibility(View.GONE);
+                                    CashButton.setText("Cash Out");
                                     getSupportActionBar().setTitle("Cash Out");
                                 }
                             }

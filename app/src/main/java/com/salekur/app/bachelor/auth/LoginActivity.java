@@ -201,7 +201,7 @@ public class LoginActivity extends AppCompatActivity {
                         TextView DialogError = (TextView) dialog.findViewById(R.id.dialog_custom_error);
 
                         DialogTitle.setText("Account Not Found");
-                        DialogMessage.setText("You do not have any account by" + account.getEmail() + ". Do you want to create now?");
+                        DialogMessage.setText("You do not have any account by " + account.getEmail() + ". Do you want to create now?");
                         DialogOk.setText("Create");
                         DialogError.setText("Change Email");
                         DialogError.setTextColor(getResources().getColor(R.color.colorRed));

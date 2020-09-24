@@ -301,12 +301,12 @@ public class AddMealActivity extends AppCompatActivity {
     }
 
     private void UpdateMealCashInfo(final GetValue getValue) {
-        RootRef.child("Users").child(CurrentUserID).child("group").addValueEventListener(new ValueEventListener() {
+        RootRef.child("Users").child(CurrentUserID).child("group").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     final String GID = snapshot.getValue().toString();
-                    RootRef.child("Groups").child(GID).child("cash").child("users").child(CurrentUserID).addValueEventListener(new ValueEventListener() {
+                    RootRef.child("Groups").child(GID).child("cash").child("users").child(CurrentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             double UserCashAmount = 0.0, UserCashInAmount = 0.0;
@@ -322,7 +322,7 @@ public class AddMealActivity extends AppCompatActivity {
 
                             //UserCashIn.setText(String.valueOf(UserCashInAmount));
                             final double finalUserCashAmount = UserCashAmount;
-                            RootRef.child("Groups").child(GID).child("cash").child("group").orderByChild("type").equalTo("group_cost").addValueEventListener(new ValueEventListener() {
+                            RootRef.child("Groups").child(GID).child("cash").child("group").orderByChild("type").equalTo("group_cost").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     double GroupTotalCost = 0.0;
