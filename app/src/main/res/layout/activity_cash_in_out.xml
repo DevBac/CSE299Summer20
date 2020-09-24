@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".group.CashInOutActivity">
+
+    <include android:id="@+id/cash_in_out_toolbar"
+        layout="@layout/toolbar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cash_in_out_toolbar"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/cash_in_out_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <RadioButton
+                android:id="@+id/cash_in_out_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash Out"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/cash_in_out_radio_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash In"
+                android:layout_marginLeft="15dp"/>
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/cash_in_out_search_member"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter member name"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cash_in_out_search_member_recycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/cash_in_out_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Select date"
+                    android:background="@drawable/custom_input"
+                    android:drawableLeft="@drawable/ic_event"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:editable="false"/>
+
+                <EditText
+                    android:id="@+id/cash_in_out_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Enter amount"
+                    android:inputType="number"
+                    android:background="@drawable/custom_input"
+                    android:drawableLeft="@drawable/ic_cash"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"/>
+
+                <EditText
+                    android:id="@+id/cash_in_out_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Enter your password"
+                    android:inputType="textPassword"
+                    android:background="@drawable/custom_input"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"/>
+
+                <Button
+                    android:id="@+id/cash_in_out_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Add Cost"
+                    android:background="@drawable/custom_button"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bottom_bg"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:id="@+id/dialog_bottom">
+
+    <TextView
+        android:id="@+id/dialog_bottom_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="loading"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:textAlignment="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dialog_bottom_item_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="loading"
+        android:textColor="@color/colorBlack"
+        android:drawableStart="@drawable/ic_group"
+        android:drawableTint="@color/colorBlack"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dialog_bottom_item_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="loading"
+        android:textColor="@color/colorBlack"
+        android:drawableStart="@drawable/ic_group"
+        android:drawableTint="@color/colorBlack"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dialog_bottom_item_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="loading"
+        android:textColor="@color/colorBlack"
+        android:drawableStart="@drawable/ic_group"
+        android:drawableTint="@color/colorBlack"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dialog_bottom_item_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="loading"
+        android:textColor="@color/colorBlack"
+        android:drawableStart="@drawable/ic_group"
+        android:drawableTint="@color/colorBlack"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dialog_bottom_item_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="loading"
+        android:textColor="@color/colorBlack"
+        android:drawableStart="@drawable/ic_group"
+        android:drawableTint="@color/colorBlack"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dialog_bottom_item_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="loading"
+        android:textColor="@color/colorBlack"
+        android:drawableStart="@drawable/ic_group"
+        android:drawableTint="@color/colorBlack"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
+
+</LinearLayout>

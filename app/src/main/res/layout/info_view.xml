@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/custom_button"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:id="@+id/info_view">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/info_view_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/user"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/colorWhite"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/info_view_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="loading"
+                android:textSize="16sp"
+                android:textColor="@color/colorWhite"
+                android:paddingLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/info_view_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="loading"
+                android:textSize="14sp"
+                android:textColor="@color/colorBlack"
+                android:paddingLeft="5dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/info_view_action"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_right"
+            app:tint="@color/colorWhite"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

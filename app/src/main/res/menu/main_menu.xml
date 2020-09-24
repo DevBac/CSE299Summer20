@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/main_menu_notification"
+        android:title="Notification"
+        app:showAsAction="always"
+        android:iconTint="@color/colorBlack"
+        android:icon="@drawable/ic_notification"/>
+    <item android:id="@+id/main_menu_logout"
+        android:title="Sign Out"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_exit"/>
+    <item android:id="@+id/main_menu_setting"
+        android:title="Settings"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_settings"/>
+    <item android:id="@+id/main_menu_help"
+        android:title="Help"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_help"/>
+</menu>

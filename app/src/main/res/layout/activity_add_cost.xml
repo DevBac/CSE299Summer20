@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".group.AddCostActivity">
+
+    <include android:id="@+id/add_cost_toolbar"
+        layout="@layout/toolbar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/add_cost_toolbar"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/add_cost_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <RadioButton
+                android:id="@+id/add_cost_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group Cost"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/add_cost_radio_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Member Cost"
+                android:layout_marginLeft="15dp"/>
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/add_cost_search_member"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter member name"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/add_cost_search_member_recycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/add_cost_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Enter cost name"
+                    android:background="@drawable/custom_input"
+                    android:drawableLeft="@drawable/ic_money"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"/>
+
+                <EditText
+                    android:id="@+id/add_cost_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Select cost date"
+                    android:background="@drawable/custom_input"
+                    android:drawableLeft="@drawable/ic_event"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:editable="false"/>
+
+                <EditText
+                    android:id="@+id/add_cost_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Enter amount"
+                    android:inputType="number"
+                    android:background="@drawable/custom_input"
+                    android:drawableLeft="@drawable/ic_cash"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"/>
+
+                <EditText
+                    android:id="@+id/add_cost_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Enter your password"
+                    android:inputType="textPassword"
+                    android:background="@drawable/custom_input"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"/>
+
+                <Button
+                    android:id="@+id/add_cost_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Add Cost"
+                    android:background="@drawable/custom_button"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "125527851957",
+    "firebase_url": "https://test-salekur.firebaseio.com",
+    "project_id": "test-salekur",
+    "storage_bucket": "test-salekur.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125527851957:android:c737aa19624dc99c43cffc",
+        "android_client_info": {
+          "package_name": "com.salekur.app.bachelor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125527851957-si3tk2m95eug0rqk1ko3pmb2p4npv4ic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA04t0QkjwcmJzFXSna_r1Ftg7godl91b4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125527851957-si3tk2m95eug0rqk1ko3pmb2p4npv4ic.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "125527851957-8fdta8eg30r7vpv28dfd6vqr9r3rmetb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.salekur.app.bachelor"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

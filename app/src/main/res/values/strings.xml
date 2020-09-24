@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Bachelor</string>
+
+    <string name="loading">Loading</string>
+    <string name="show_profile_email">show_profile_email</string>
+    <string name="show_profile_phone">show_profile_phone</string>
+    <string name="show_group_name">show_group_name</string>
+    <string name="group_join_request_from_user">group_join_request_from_user</string>
+    <string name="group_join_request_from_group">group_join_request_from_group</string>
+    <string name="request_id">125527851957-si3tk2m95eug0rqk1ko3pmb2p4npv4ic.apps.googleusercontent.com</string>
+    <string name="incorrect_password">The password is invalid or the user does not have a password.</string>
+    <string name="acc_no_exist">There is no user record corresponding to this identifier. The user may have been deleted.</string>
+</resources>

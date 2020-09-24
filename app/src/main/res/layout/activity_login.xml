@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".auth.LoginActivity"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <include android:id="@+id/login_toolbar"
+        layout="@layout/toolbar_layout"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_toolbar"
+        android:text="Join Bachelor app to make your life easier. Register or Login now."
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:padding="25dp"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_signup"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/login_button_google"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="Login with Google"
+        android:textColor="@color/colorWhite"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:background="@drawable/custom_button"/>
+
+</RelativeLayout>

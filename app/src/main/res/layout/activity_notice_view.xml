@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".group.NoticeViewActivity">
+
+    <include android:id="@+id/notice_view_toolbar"
+        layout="@layout/toolbar_layout"/>
+
+    <LinearLayout
+        android:id="@+id/notice_view_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notice_view_toolbar"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/notice_view_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notice_view_toolbar"
+            android:hint="Update notice"
+            android:background="@drawable/custom_input"
+            android:padding="10dp"
+            android:inputType="textMultiLine"/>
+
+        <Button
+            android:id="@+id/notice_view_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/notice_view_input"
+            android:layout_marginTop="5dp"
+            android:text="Update"
+            android:background="@drawable/custom_button"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/notice_view_notice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/notice_view_update"
+        android:text="@string/loading"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:padding="10dp"/>
+
+</RelativeLayout>
