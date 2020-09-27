@@ -24,7 +24,8 @@
             android:name=".SettingActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".group.ComplainActivity" />
-        <activity android:name=".group.SendCashActivity" />
+        <activity android:name=".group.SendCashActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".group.NoticeViewActivity"
             android:parentActivityName=".MainActivity" />

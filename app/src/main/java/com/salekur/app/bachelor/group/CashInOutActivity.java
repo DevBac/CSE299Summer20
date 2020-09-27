@@ -288,6 +288,7 @@ public class CashInOutActivity extends AppCompatActivity {
                                         });
                                     } else if (CashType.equals("cash_in")) {
                                         if (MemberID.isEmpty()) {
+                                            loadingBar.dismiss();
                                             MemberName.setError("Select member");
                                         } else {
                                             Map cashMap = new HashMap();
@@ -405,7 +406,6 @@ public class CashInOutActivity extends AppCompatActivity {
                                 }
                             }
 
-                            //UserCashIn.setText(String.valueOf(UserCashInAmount));
                             final double finalUserCashAmount = UserCashAmount;
                             RootRef.child("Groups").child(GID).child("cash").child("group").orderByChild("type").equalTo("group_cost").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -448,11 +448,12 @@ public class CashInOutActivity extends AppCompatActivity {
                                             }
 
                                             double MealRateAmount = (-finalGroupTotalCost) / GroupTotalMeal;
-                                            //UserMealRate.setText(String.valueOf(MealRateAmount));
+                                            if ((String.valueOf(MealRateAmount)).equals("NaN")) {
+                                                MealRateAmount = 0.0;
+                                            }
+
                                             double MyMealCost = MyTotalMeal * MealRateAmount;
                                             double UserCashNowAmount = finalUserCashAmount - MyMealCost;
-                                            //UserCashNow.setText(String.valueOf(UserCashNowAmount));
-
                                             getValue.onValue(UserCashNowAmount);
                                         }
 

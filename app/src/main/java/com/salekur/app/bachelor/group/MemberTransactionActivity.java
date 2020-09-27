@@ -68,7 +68,7 @@ public class MemberTransactionActivity extends AppCompatActivity {
                     FirebaseRecyclerAdapter<Transaction, ViewHolder> adapter = new FirebaseRecyclerAdapter<Transaction, ViewHolder>(options) {
                         @Override
                         protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Transaction model) {
-                            if (model.getType().equals("member_cost") || model.getType().equals("cash_in") || model.getType().equals("receive_money")) {
+                            if (model.getType().equals("member_cost") || model.getType().equals("cash_in") || model.getType().equals("receive_cash")) {
                                 RootRef.child("Users").child(model.getFrom()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {

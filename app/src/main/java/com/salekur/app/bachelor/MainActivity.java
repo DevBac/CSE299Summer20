@@ -1,7 +1,6 @@
 package com.salekur.app.bachelor;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -24,7 +23,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -329,6 +327,33 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                // Update meal
+                GroupMoreItem3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        Toast.makeText(MainActivity.this, "Working on update", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // Update meal counter
+                GroupMoreItem4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        Toast.makeText(MainActivity.this, "Working on update", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // Update meal menu
+                GroupMoreItem5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        Toast.makeText(MainActivity.this, "Working on update", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 bottomDialog.setContentView(bottomDialogView);
                 bottomDialog.show();
             }
@@ -393,6 +418,10 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                                 double MealRateAmount = (-finalGroupTotalCost) / GroupTotalMeal;
+                                if ((String.valueOf(MealRateAmount)).equals("NaN")) {
+                                    MealRateAmount = 0.0;
+                                }
+
                                 UserMealRate.setText(String.valueOf(MealRateAmount));
                                 double MyMealCost = MyTotalMeal * MealRateAmount;
                                 double UserCashNowAmount = finalUserCashAmount - MyMealCost;
