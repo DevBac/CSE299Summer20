@@ -45,31 +45,31 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
+    //declaring variables to connect ui components
     private RelativeLayout MainAfterView;
     private LinearLayout UserProfileView;
     private CardView GroupMemberAction, MemberTransactionAction, GroupNoticeAction, GroupSendCashAction, GroupRequestCashAction, GroupComplainAction;
-
     private TextView UserFirstName, UserGroupName;
     private CircleImageView UserProfileImage;
-
     private TextView GroupMore;
     private TextView UserCashNow, UserMealRate, UserCashIn;
-
     private FloatingActionsMenu FabMenu;
     private FloatingActionButton FabAddMeal, FabAddCash;
 
+    //declaring variables to manage user and their data from firebase
     private FirebaseAuth auth;
     private FirebaseUser CurrentUser;
     private DatabaseReference RootRef;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        //assigning variables
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.app_name));
+        getSupportActionBar().setTitle(getString(R.string.app_name)); //setting page title
 
         auth = FirebaseAuth.getInstance();
         CurrentUser = auth.getCurrentUser();
@@ -106,22 +106,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if (auth.getCurrentUser() == null) {
+        //checking user is logged in or not
+        if (auth.getCurrentUser() == null) { //if user is null then sending to login
             SendUserToLoginActivity();
-        } else {
+        } else { //if logged in then displaying their information and update the page
             RootRef.child("Users").child(CurrentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull final DataSnapshot snapshot) {
                     if (snapshot.child("group").exists()) {
                         MainAfterView.setVisibility(View.VISIBLE);
+                        //getting user update information from google
                         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-                        if (!account.getGivenName().isEmpty()) {
+                        if (!account.getGivenName().isEmpty()) { //displaying user account name
                             UserFirstName.setText("Welcome " + account.getGivenName() + "!");
                         }
-                        if (account.getPhotoUrl() != null) {
+                        if (account.getPhotoUrl() != null) { //displaying user account picture
                             Picasso.get().load(account.getPhotoUrl().toString()).placeholder(R.drawable.user).into(UserProfileImage);
                         }
 
+                        //displaying user group name
                         RootRef.child("Groups").child(snapshot.child("group").getValue().toString()).child("name").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -150,12 +153,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //main page three dot menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    //click handler on any menu button
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -175,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //initializing buttons
     private void InitializeButtons() {
         FabAddMeal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        GroupMore.setOnClickListener(new View.OnClickListener() {
+        GroupMore.setOnClickListener(new View.OnClickListener() { //initializing bottom menu and their activity
             @Override
             public void onClick(View v) {
                 final BottomSheetDialog bottomDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomDialogTheme);
@@ -360,7 +366,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //getting user cash information by group id
     private void UpdateMealCashInfo(final String GID) {
+        //getting user total cash and cash in
         RootRef.child("Groups").child(GID).child("cash").child("users").child(CurrentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -377,6 +385,7 @@ public class MainActivity extends AppCompatActivity {
 
                 UserCashIn.setText(String.valueOf(UserCashInAmount));
                 final double finalUserCashAmount = UserCashAmount;
+                //getting user total group cost
                 RootRef.child("Groups").child(GID).child("cash").child("group").orderByChild("type").equalTo("group_cost").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -388,6 +397,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         final double finalGroupTotalCost = GroupTotalCost;
+                        //getting user group total meal and personal total meal to find meal rate
                         RootRef.child("Groups").child(GID).child("meal").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -417,11 +427,13 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
 
+                                //calculating meal rate
                                 double MealRateAmount = (-finalGroupTotalCost) / GroupTotalMeal;
                                 if ((String.valueOf(MealRateAmount)).equals("NaN")) {
                                     MealRateAmount = 0.0;
                                 }
 
+                                //calculating balance and set them in ui
                                 UserMealRate.setText(String.valueOf(MealRateAmount));
                                 double MyMealCost = MyTotalMeal * MealRateAmount;
                                 double UserCashNowAmount = finalUserCashAmount - MyMealCost;
@@ -449,86 +461,102 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //signing ou user
     private void UserSignOut() {
         auth.signOut();
         SendUserToLoginActivity();
     }
 
+    //sending user to login page
     private void SendUserToLoginActivity() {
         Intent LoginIntent = new Intent(MainActivity.this, LoginActivity.class);
         LoginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(LoginIntent);
     }
 
+    //send user to support page
     private void SendUserToSupportActivity() {
         Intent SupportIntent = new Intent(this, SupportActivity.class);
         startActivity(SupportIntent);
     }
 
+    //sending user to notification page
     private void SendUserToNotificationActivity() {
         Intent NotificationIntent = new Intent(this, NotificationActivity.class);
         startActivity(NotificationIntent);
     }
 
+    //sending user to join group page
     private void SendUserToJoinGroupActivity() {
         Intent JoinGroupIntent = new Intent(this, JoinGroupActivity.class);
         JoinGroupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(JoinGroupIntent);
     }
 
+    //sending user to add cost page
     private void SendUserToAddCostActivity() {
         Intent AddCostIntent = new Intent(this, AddCostActivity.class);
         startActivity(AddCostIntent);
     }
 
+    //sending user to login page
     private void SendUserToAddMealActivity() {
         Intent AddMealIntent = new Intent(this, AddMealActivity.class);
         startActivity(AddMealIntent);
     }
 
+    //sending user to profile page
     private void SendUserToViewProfileActivity() {
         Intent ViewProfileIntent = new Intent(this, ViewProfileActivity.class);
         ViewProfileIntent.putExtra("user_id", CurrentUser.getUid());
         startActivity(ViewProfileIntent);
     }
 
+    //sending user to group member page
     private void SendUserToGroupMemberActivity() {
         Intent GroupMemberIntent = new Intent(this, GroupMemberActivity.class);
         startActivity(GroupMemberIntent);
     }
 
+    //sending user to transactions page
     private void SendUserToMemberTransactionActivity() {
         Intent MemberTransactionIntent = new Intent(this, MemberTransactionActivity.class);
         startActivity(MemberTransactionIntent);
     }
 
+    //sending user to notice page
     private void SendUserToGroupNoticeActivity() {
         Intent GroupNoticeIntent = new Intent(this, NoticeViewActivity.class);
         startActivity(GroupNoticeIntent);
     }
 
+    //sending user to send cash page
     private void SendUserToGroupSendCashActivity() {
         Intent SendCashIntent = new Intent(this, SendCashActivity.class);
         SendCashIntent.putExtra("action", "send_cash");
         startActivity(SendCashIntent);
     }
 
+    //sending user to request cash page
     private void SendUserToGroupRequestCashActivity() {
         Intent RequestCashIntent = new Intent(this, SendCashActivity.class);
         RequestCashIntent.putExtra("action", "request_cash");
         startActivity(RequestCashIntent);
     }
 
+    //sending user to complain page
     private void SendUserToGroupComplainActivity() {
         Intent ComplainIntent = new Intent(this, ComplainActivity.class);
         startActivity(ComplainIntent);
     }
 
+    //sending user to settings page
     private void SendUserToSettingActivity() {
         Intent SettingIntent = new Intent(this, SettingActivity.class);
         startActivity(SettingIntent);
     }
 
+    //sending user to cash out page
     private void SendUserToCashInOutActivity() {
         Intent cashInOutIntent = new Intent(this, CashInOutActivity.class);
         startActivity(cashInOutIntent);

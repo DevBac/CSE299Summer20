@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
+    //assigning variables
     private static final int RC_SIGN_IN = 1001;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleSignInOptions gso;
@@ -61,11 +62,14 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Login");
 
+        //google sign in option to check user sign in status by google auth
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.request_id)).requestEmail().build();
 
         try {
+            //assigning variable
             mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         } catch (Exception e) {
+            //handling error
             Toast.makeText(this, "12", Toast.LENGTH_SHORT).show();
             Log.d("Error", "Error: " + e.getMessage());
         }
@@ -74,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         RootRef = FirebaseDatabase.getInstance().getReference();
         SignInButton = (Button) findViewById(R.id.login_button_google);
 
+        // on click buttons
         SignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //for getting google auth result status
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -97,12 +103,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // login page menus
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.login_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    //login page menu on click menu item
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -113,11 +121,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // sign in function when clicked to login
     private void SignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    //get user password from pop up dialog for google account email
     private void GetPassword(final GoogleSignInAccount account) {
         final Dialog dialog = new Dialog(this);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -163,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    //try to login with google email and dialog password
     private void LoginWithEmailAndPassword(final GoogleSignInAccount account, final String password) {
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.setMessage("Logging...");
@@ -234,6 +245,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //if account not found by email password continue to register
     private void RegisterWithEmailAndPassword(final GoogleSignInAccount account, String password) {
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.setMessage("Registering...");
@@ -253,6 +265,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //link email password account with google
     private void LinkAccountWithGoogle(final GoogleSignInAccount account) {
         if (CurrentUser != null) {
             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
@@ -274,6 +287,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //getting firebase auth information
     private void FirebaseAuthWithGoogle(final GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
@@ -293,6 +307,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //update users data from google to firebase app database
     private void UpdateUserData(GoogleSignInAccount account) {
         if (CurrentUser != null) {
             Map UserDataMap = new HashMap();
@@ -320,12 +335,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //sending user to main page if login done
     private void SendUserToMainActivity() {
         Intent MainIntent = new Intent(this, MainActivity.class);
         MainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(MainIntent);
     }
 
+    //sending support page if need any help
     private void SendUserToSupportActivity() {
         Intent SupportIntent = new Intent(this, SupportActivity.class);
         startActivity(SupportIntent);

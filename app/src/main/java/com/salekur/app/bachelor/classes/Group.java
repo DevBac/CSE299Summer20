@@ -1,5 +1,6 @@
 package com.salekur.app.bachelor.classes;
 
+//class for getting group information from firebase
 public class Group {
     String id, name, admin;
 

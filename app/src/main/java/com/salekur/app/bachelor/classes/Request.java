@@ -1,5 +1,6 @@
 package com.salekur.app.bachelor.classes;
 
+//class for getting request information from firebase
 public class Request {
     String type, from, to, group;
 

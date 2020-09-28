@@ -12,6 +12,7 @@ import com.salekur.app.bachelor.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+//class for setting information to ui
 public class ViewHolder extends RecyclerView.ViewHolder {
     public RelativeLayout InfoView;
     public CircleImageView InfoImage;

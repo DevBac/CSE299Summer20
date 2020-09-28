@@ -1,5 +1,6 @@
 package com.salekur.app.bachelor.classes;
 
+//class for getting user information from firebase
 public class User {
     String id, first_name, last_name, email, image, group;
 

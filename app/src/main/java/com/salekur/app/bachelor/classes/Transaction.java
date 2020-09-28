@@ -1,5 +1,6 @@
 package com.salekur.app.bachelor.classes;
 
+//class for getting transaction information from firebase
 public class Transaction {
     public String type, name, note, date, time, amount, from, to;
 

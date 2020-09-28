@@ -1,5 +1,6 @@
 package com.salekur.app.bachelor.classes;
 
+//class for getting meal information from firebase
 public class Meal {
     public String breakfast, lunch, dinner;
 

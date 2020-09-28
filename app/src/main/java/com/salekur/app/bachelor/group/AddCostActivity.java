@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddCostActivity extends AppCompatActivity {
+    //declaring variables
     private EditText MemberName, CostName, CostDate, CostAmount, CostPassword;
     private Button AddCostButton;
     private RecyclerView MemberRecycle;
@@ -60,6 +61,7 @@ public class AddCostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //assigning variables
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_cost);
 
@@ -83,11 +85,13 @@ public class AddCostActivity extends AppCompatActivity {
         MemberRecycle = (RecyclerView) findViewById(R.id.add_cost_search_member_recycle);
         MemberRecycle.setLayoutManager(new LinearLayoutManager(this));
 
+        //getting local date
         Calendar c = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy");
         String date = simpleDateFormat.format(c.getTime());
         CostDate.setText(date);
 
+        //choose date from date picker
         CostDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +115,7 @@ public class AddCostActivity extends AppCompatActivity {
             }
         });
 
+        //live text watcher for search
         MemberName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -131,6 +136,7 @@ public class AddCostActivity extends AppCompatActivity {
             }
         });
 
+        // on click add cost button
         AddCostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,12 +149,15 @@ public class AddCostActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //checking group or member cost action and setting their corresponding variables
+        //getting user group id
         RootRef.child("Users").child(CurrentUserID).child("group").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     String GID = snapshot.getValue().toString();
 
+                    //getting group admin
                     RootRef.child("Groups").child(GID).child("admin").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -156,6 +165,7 @@ public class AddCostActivity extends AppCompatActivity {
                                 String GroupAdmin = snapshot.getValue().toString();
                                 radioGroup = (RadioGroup) findViewById(R.id.add_cost_radio);
 
+                                //checking user itself admin or not and setting their variables
                                 if (GroupAdmin.equals(CurrentUserID)) {
                                     radioGroup.setVisibility(View.VISIBLE);
                                     radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -173,6 +183,7 @@ public class AddCostActivity extends AppCompatActivity {
                                         }
                                     });
                                 } else {
+                                    //if user itself is nit admin
                                     CostType = "group";
                                     radioGroup.setVisibility(View.GONE);
                                     MemberName.setVisibility(View.GONE);
@@ -195,7 +206,9 @@ public class AddCostActivity extends AppCompatActivity {
         });
     }
 
+    //adding cost to firebase database according to member or group cost
     private void AddAndUpdateCost() {
+        //getting inputs and checking their values is empty or not
         final String name = CostName.getText().toString();
         final String date = CostDate.getText().toString();
         final String amount = CostAmount.getText().toString();
@@ -214,6 +227,7 @@ public class AddCostActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 
+            //auth user again by password
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), password);
             currentUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -227,13 +241,14 @@ public class AddCostActivity extends AppCompatActivity {
                             Toast.makeText(AddCostActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        //adding cost
                         RootRef.child("Users").child(CurrentUserID).child("group").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
                                     String GID = snapshot.getValue().toString();
 
-                                    if (CostType.equals("group")) {
+                                    if (CostType.equals("group")) { //for group cost
                                         Map groupCostMap = new HashMap();
                                         groupCostMap.put("type", "group_cost");
                                         groupCostMap.put("name", name);
@@ -256,7 +271,7 @@ public class AddCostActivity extends AppCompatActivity {
                                                 }
                                             }
                                         });
-                                    } else if (CostType.equals("member")) {
+                                    } else if (CostType.equals("member")) { // for member cost
                                         if (MemberID.isEmpty()) {
                                             MemberName.setError("Select member");
                                         } else {
@@ -305,6 +320,7 @@ public class AddCostActivity extends AppCompatActivity {
         }
     }
 
+    //searching member with name by from firebase
     private void SearchMemberWithName(final String name) {
         MemberRecycle.setVisibility(View.VISIBLE);
         RootRef.child("Users").child(CurrentUserID).child("group").addValueEventListener(new ValueEventListener() {

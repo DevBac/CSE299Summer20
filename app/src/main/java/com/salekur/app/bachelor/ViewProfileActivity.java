@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewProfileActivity extends AppCompatActivity {
+    //declaring variables
     private CircleImageView ProfileImage;
     private TextView ProfileName, ProfileEmail, ProfileGroup, ProfilePhone, ProfileGender;
     private LinearLayout ProfileGroupAction, ProfilePhoneAction, ProfileGenderAction;
@@ -42,12 +43,14 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //assigning variables
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
         RootRef = FirebaseDatabase.getInstance().getReference();
         CurrentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         try {
+            //getting user id from source page to view their profile information from firebase
             UserID = getIntent().getStringExtra("user_id");
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -73,6 +76,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //checking and displaying user information from firebase by user id
         if (UserID != null) {
             RootRef.child("Users").child(UserID).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -156,7 +160,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                 }
             });
 
-            if (CurrentUserID.equals(UserID)) {
+            if (CurrentUserID.equals(UserID)) { //information for user itself
                 ProfilePhoneActionIcon.setVisibility(View.VISIBLE);
                 ProfileGenderActionIcon.setVisibility(View.VISIBLE);
 
@@ -311,6 +315,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         }
     }
 
+    //sending user to group member page
     private void SendUserToGroupMemberActivity() {
         Intent GroupMemberIntent = new Intent(this, GroupMemberActivity.class);
         startActivity(GroupMemberIntent);

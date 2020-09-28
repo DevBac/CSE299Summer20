@@ -19,12 +19,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class SettingActivity extends AppCompatActivity {
+    //declaring variables
     private Switch ShowProfileEmail, ShowProfilePhone, ShowGroupName;
     private DatabaseReference RootRef;
     private String CurrentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //assigning variables
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
@@ -41,6 +43,7 @@ public class SettingActivity extends AppCompatActivity {
         ShowProfilePhone = (Switch) findViewById(R.id.setting_profile_phone_switch);
         ShowGroupName = (Switch) findViewById(R.id.setting_group_name_switch);
 
+        //checking click on setting button
         ShowProfileEmail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -49,6 +52,7 @@ public class SettingActivity extends AppCompatActivity {
                     result = "yes";
                 }
 
+                //updating setting result to firebase
                 RootRef.child("Users").child(CurrentUserID).child("setting").child("profile").child(getResources().getString(R.string.show_profile_email)).setValue(result).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -68,6 +72,7 @@ public class SettingActivity extends AppCompatActivity {
                     result = "yes";
                 }
 
+                //updating setting result to firebase
                 RootRef.child("Users").child(CurrentUserID).child("setting").child("profile").child(getResources().getString(R.string.show_profile_phone)).setValue(result).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -87,6 +92,7 @@ public class SettingActivity extends AppCompatActivity {
                     result = "yes";
                 }
 
+                //updating setting result to firebase
                 RootRef.child("Users").child(CurrentUserID).child("setting").child("group").child(getResources().getString(R.string.show_group_name)).setValue(result).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -103,6 +109,7 @@ public class SettingActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //displaying setting information from firebase
         RootRef.child("Users").child(CurrentUserID).child("setting").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
